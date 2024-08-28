@@ -13,14 +13,16 @@ const client = new Client({
 module.exports = client;
 
 // <!-- Global Variables -->
+client.aliases = new Collection();
 client.commands = new Collection();
 client.slashCommands = new Collection();
+client.config = new require("./config.json");
 
 // <!-- Event Handler -->
 client.on("ready", () => {
   client.user.setStatus("dnd");
   client.user.setActivity("XversE-Adv-Handler", { type: "WATCHING" });
-  console.log(`[>] ✅ | ${client.user.username} is Ready to use!`);
+  console.log(`[>] 🚀 | ${client.user.username} is Ready to use!`);
   
   client.channels.fetch(process.env.logChannelID || config.XversE.logChannelID).then((log) => {
     log.send(`\`\`\`xml\n🚀 I'm ready to use!\n🟢 Version :: ${config.XversE.version}\`\`\``);
