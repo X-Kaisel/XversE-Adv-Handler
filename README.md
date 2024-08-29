@@ -1,7 +1,7 @@
 [![Github Profile](https://img.shields.io/badge/Github-Jarvis1337-blueviolet?style=for-the-badge&logo=github)](https://github.com/Jarvis1337/)
 [![Library](https://img.shields.io/badge/Library-Node.js_v18-orange?style=for-the-badge&logo=nodedotjs)](https://nodejs.org/en) 
 [![Javascript](https://img.shields.io/badge/Javascript_Library-Discord.js_v13.16.0-blue?style=for-the-badge&logo=javascript)](https://discord.js.org/) 
-[![Github repo version](https://img.shields.io/badge/XversE_Adv_Handler-v1.2.5-brightgreen?style=for-the-badge&logo=github)](https://github.com/Jarvis1337/XversE-Adv-Handler/releases/tag/v1.2.5) 
+[![Github repo version](https://img.shields.io/badge/XversE_Adv_Handler-v1.3.1-brightgreen?style=for-the-badge&logo=github)](https://github.com/Jarvis1337/XversE-Adv-Handler/releases/tag/v1.3.1) 
 [![Github Releases](https://img.shields.io/badge/Github-Releases-ff0000?style=for-the-badge&logo=github)](https://github.com/Jarvis1337/XversE-Adv-Handler/releases) 
 [![GitHub repo size](https://img.shields.io/github/repo-size/Jarvis1337/XversE-Adv-Handler?style=for-the-badge&color=00ffff&label=Repository%20Size&logo=github)](https://github.com/Jarvis1337/XversE-Adv-Handler/)
 [![platform replit](https://img.shields.io/badge/Platform-Replit-000000?style=for-the-badge&logo=replit)](https://replit.com/)
@@ -48,15 +48,15 @@
 > ```
 
 ***5. Configure the Settings :***  
-- *Edit or modify the `config.json` file (or any other configuration file specified in the project documentation) to match your specific requirements, such as bot tokens, database connections, and other settings...*
+- *Edit or modify the `config.js` file (or any other configuration file specified in the project documentation) to match your specific requirements, such as bot tokens, database connections, and other settings...*
 
-```json confif.json
+```js config.js
 {
-  "token": "",
-  "prefix": "..",
-  "XversE": {
-    "version" : "1.2.5",
-    "logChannelID" : "Logging-Channel-ID" 
+  TOKEN : process.env.TOKEN || "",
+  "PREFIX" : process.env.PREFIX || "..",
+  "XversE" : {
+    "version" : "1.3.1",
+    "logChannelID" : process.env.logChannelID || "Logging-Channel-ID" 
   } 
 }
 ```

@@ -1,4 +1,4 @@
-const config = require("../../config.json");
+const config = require("../../settings/config.js");
 
 module.exports = {
   name: "version",

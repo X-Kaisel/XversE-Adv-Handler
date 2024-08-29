@@ -1,9 +1,9 @@
-const config = require("../config.json");
+const config = require("../settings/config.js");
 const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
 
 module.exports = (client) => {
   client.on("messageCreate", async (message) => {
-    let XprefiX = config.prefix;
+    let XprefiX = config.PREFIX;
     var XversEmention = `<@${client.user.id}>`
 
     let Github = new MessageActionRow().addComponents([
