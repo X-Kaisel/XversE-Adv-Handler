@@ -1,38 +1,67 @@
-const fs = require("fs");
-const config = require("../settings/config.js");
+const { glob } = require("glob");
+const { promisify } = require("util");
+const globPromise = promisify(glob);
+const XversE = require("../index");
 
-// <!-- File Handler --> 
-module.exports = (client) => {
+/**
+ * @param {XversE} client
+ */
+module.exports = async (client) => {
+  // <!----- [ Registering Slash Commands (Globally) ] ----->
+  try {
+    let arrayOfcommands = [];
+    const commandFiles = await globPromise(
+      `${process.cwd()}/Commands/Slash/**/*.js`
+    );
+    commandFiles.map((value) => {
+      const file = require(value);
+      const splitted = value.split("/");
+      const directory = splitted[splitted.length - 2];
+      const properties = { directory, ...file };
+      client.slashCommands.set(file.name, properties);
+      arrayOfcommands.push(file);
+    });
 
-  const XcommandFiles = fs
-    .readdirSync("Commands/Message")
-    .filter((file) => file.endsWith(".js"));
+    client.on("ready", async () => {
+      await client.application.commands.set(arrayOfcommands);
+      console.log("[/] 🌐 | Successfully Registered Slash Commands <3...");
+      setTimeout(() => {
+        console.log(`[!] 🌐 | Node Connected [ 🟢 Node ${client.ws.ping} MS ]`);
+      }, 5000);
+      
+    });
 
-  for (const file of XcommandFiles) {
-    const command = require(`../Commands/Message/${file}`);
-    client.commands.set(command.name, command);
+    console.log(`[>] ✅ | ${client.slashCommands.size} Slash Commands Loaded`);
+  } catch (error) {
+    console.log(error);
   }
 
-  const registerSlashCommands = () => {
-    const XslashCommandFiles = fs
-      .readdirSync("Commands/Slash")
-      .filter((file) => file.endsWith(".js"));
-    for (const file of XslashCommandFiles) {
-      const slashCommand = require(`../Commands/Slash/${file}`);
-      client.slashCommands.set(slashCommand.data.name, slashCommand);
-    }
-  };
-
-  client.on("ready", () => {
-    // <!-- For Registering Slash Commands (Globally) -->
-    console.log("[/] 🌐 | Registering Slash Commands <3...");
-    console.log(`[!] 🌐 | Node Connected [ 🟢 Node ${client.ws.ping} MS ]`);
-    registerSlashCommands();
-    const globalCommands = [...client.slashCommands.values()].map(
-      (command) => command.data,
+  // <!----- [ Loading Message Commands ] ----->
+  try {
+    const MessageCommadsFiles = await globPromise(
+      `${process.cwd()}/Commands/Message/**/*.js`
     );
-    client.application.commands.set(globalCommands);
+    MessageCommadsFiles.map((value) => {
+      const file = require(value);
+      const splitted = value.split("/");
+      const directory = splitted[splitted.length - 2];
+      const properties = { directory, ...file };
+      client.commands.set(file.name, properties);
+      if (file.aliases && Array.isArray(file.aliases))
+        file.aliases.forEach((a) => client.aliases.set(a, file.name));
+    });
+
     console.log(`[>] ✅ | ${client.commands.size} Message Commands Loaded`);
-    console.log(`[>] ✅ | ${client.slashCommands.size} Slash Commands Loaded`);
-  });
+  } catch (error) {
+    console.log(error);
+  }
+  
+  // <!----- [ Loading Events Files ] ----->
+  try {
+    const eventFiles = await globPromise(`${process.cwd()}/events/*.js`);
+    eventFiles.map((value) => require(value));
+    console.log(`[>] ✅ | ${eventFiles.length} Events Loaded`);
+  } catch (error) {
+    console.log(error);
+  }
 };
