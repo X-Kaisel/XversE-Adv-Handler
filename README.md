@@ -1,7 +1,7 @@
 [![Github Profile](https://img.shields.io/badge/Github-Jarvis1337-blueviolet?style=for-the-badge&logo=github)](https://github.com/Jarvis1337/)
 [![Library](https://img.shields.io/badge/Library-Node.js_v18-orange?style=for-the-badge&logo=nodedotjs)](https://nodejs.org/en) 
 [![Javascript](https://img.shields.io/badge/Javascript_Library-Discord.js_v13.16.0-blue?style=for-the-badge&logo=javascript)](https://discord.js.org/) 
-[![Github repo version](https://img.shields.io/badge/XversE_Adv_Handler-v2.0-brightgreen?style=for-the-badge&logo=github)](https://github.com/Jarvis1337/XversE-Adv-Handler/releases/tag/v2.0) 
+[![Github repo version](https://img.shields.io/badge/XversE_Adv_Handler-v2.0.1-brightgreen?style=for-the-badge&logo=github)](https://github.com/Jarvis1337/XversE-Adv-Handler/releases/tag/v2.0.1) 
 [![Github Releases](https://img.shields.io/badge/Github-Releases-ff0000?style=for-the-badge&logo=github)](https://github.com/Jarvis1337/XversE-Adv-Handler/releases) 
 [![GitHub repo size](https://img.shields.io/github/repo-size/Jarvis1337/XversE-Adv-Handler?style=for-the-badge&color=00ffff&label=Repository%20Size&logo=github)](https://github.com/Jarvis1337/XversE-Adv-Handler/)
 [![platform replit](https://img.shields.io/badge/Platform-Replit-000000?style=for-the-badge&logo=replit)](https://replit.com/)
@@ -72,6 +72,62 @@
 
 ***Following these steps should get your XversE-Adv-Handler bot up and running <3...***
 
+
+----
+
+*<h2>🚀 XversE Command File Format ( Example / Usage ) <3...</h2>*
+
+> ***This file format will help you create new commands for the XversE-Adv-Handler, You can create any Message and Interaction ( Slash ) command you want using this file format <3...***
+
+- *<h4>🚀 Message Command File Format ( Message Command )</h4>*
+
+```js
+
+const { Message } = require("discord.js");
+const Jarvisx1337 = require("../../../index");
+
+module.exports = {
+  name: "",
+  aliases: [""],
+  description: "",
+
+  /**
+   * @param {Jarvisx1337} client
+   * @param {Message} message
+   * @param {String[]} args
+   */
+  Xexecute: async (client, message, args) => {
+    // Put Your Code Here <3...
+
+  },
+};
+
+```
+
+- *<h4>🚀 Interaction Command File Format ( Slash Command ) `Chat Input`</h4>*
+
+```js
+
+const { CommandInteraction } = require("discord.js");
+const Jarvisx1337 = require("../../../index");
+
+module.exports = {
+  name: "",
+  description: "",
+  type: "CHAT_INPUT",
+
+  /**
+   * @param {Jarvisx1337} client
+   * @param {CommandInteraction} interaction
+   * @param {String[]} args
+   */
+  Xexecute: async (client, interaction, args) => {
+    // Put Your Code Here <3...
+
+  },
+};
+
+```
 
 ----
 
